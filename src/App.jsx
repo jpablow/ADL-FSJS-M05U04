@@ -6,6 +6,7 @@ import NavbarComp from './components/NavbarComp';
 import Cart from './views/Cart';
 import Home from './views/Home';
 import Detail from './views/Detail';
+import NotFound from './views/NotFound';
 
 function App() {
   return (
