@@ -2,6 +2,8 @@ import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import { NavLink } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 
 export default function NavbarComp() {
   return (
@@ -11,8 +13,8 @@ export default function NavbarComp() {
           <span>🍕</span> Pizzería Mamma Mia!
         </Navbar.Brand>
         <Container className="text-end">
-          <NavLink to="/">
-            <span>🛒</span> Var Monto Cart
+          <NavLink className="td-none text-white" to="/">
+            <FontAwesomeIcon icon={faCartShopping} /> Var Monto Cart
           </NavLink>
         </Container>
       </Container>
