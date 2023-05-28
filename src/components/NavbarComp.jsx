@@ -13,7 +13,7 @@ export default function NavbarComp() {
           <span>🍕</span> Pizzería Mamma Mia!
         </Navbar.Brand>
         <Container className="text-end">
-          <NavLink className="td-none text-white" to="/">
+          <NavLink className="td-none text-white" to="/Cart">
             <FontAwesomeIcon icon={faCartShopping} /> Var Monto Cart
           </NavLink>
         </Container>
