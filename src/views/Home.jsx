@@ -9,8 +9,8 @@ const Home = () => {
         <Container className="hd-img">
           <Col></Col>
           <Col className="align-center" md="auto">
-            <div className="d-flex flex-column text-white justify-content-center">
-              <h1>¡Pizzería Mamma Mia!</h1>
+            <div className="d-flex flex-column text-white justify-content-center hd-txt-size">
+              <h1 className="pt-5">¡Pizzería Mamma Mia!</h1>
               <p>¡Tenemos las mejores pizzas que podrás encontrar!</p>
               <hr></hr>
             </div>

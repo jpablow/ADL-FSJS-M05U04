@@ -2,6 +2,10 @@
     margin-top: 56px;
 }
 
+.hd-txt-size {
+    width: 60%;
+}
+
 .hd-img {
     background-image: url("../Pizza_bg02.jpg");
     height: 250px;
