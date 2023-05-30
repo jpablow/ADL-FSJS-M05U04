@@ -5,12 +5,15 @@ import { useNavigate } from 'react-router-dom';
 export const Context = createContext();
 
 export const Provider = ({ children }) => {
-  const [selectedPizza, setSelectedPizza] = useState([]);
   const navigate = useNavigate();
+  const [selectedPizza, setSelectedPizza] = useState([]);
 
   const verDetalle = (pid) => {
-    setSelectedPizza(data.filter((pizza) => pizza.id === pid));
-    navigate(`/pizza/${selectedPizza.name}`);
+    const filteredPizza = data.filter((pizza) => pizza.id === pid);
+    return (
+      setSelectedPizza([filteredPizza[0]]),
+      navigate(`/pizza/${filteredPizza[0].name}`)
+    );
   };
 
   // useEffect(() => {
@@ -22,6 +25,7 @@ export const Provider = ({ children }) => {
   const globalState = {
     data,
     verDetalle,
+    selectedPizza,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
