@@ -34,3 +34,8 @@ ul {
 .cust-card-footer {
     display: flex;
 }
+
+.cart-img {
+    width: auto;
+    height: 50px;
+}
