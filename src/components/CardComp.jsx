@@ -10,7 +10,7 @@ import { Context } from '../Context';
 
 // pasar array al componente para el render en Home o en Detail
 const CardComp = () => {
-  const { data, verDetalle } = useContext(Context);
+  const { data, verDetalle, anhadirPizza } = useContext(Context);
 
   // useEffect(() => {
   //   return () => {
@@ -59,7 +59,11 @@ const CardComp = () => {
                   Ver más{'  '}
                   <FontAwesomeIcon className="ms-2" icon={faPizzaSlice} />
                 </Button>
-                <Button variant="success" value={p.id}>
+                <Button
+                  variant="success"
+                  value={p.id}
+                  onClick={(e) => anhadirPizza(e.target.value)}
+                >
                   Añadir{'   '}
                   <FontAwesomeIcon className="ms-2" icon={faCartPlus} />
                 </Button>
