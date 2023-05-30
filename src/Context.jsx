@@ -25,6 +25,10 @@ export const Provider = ({ children }) => {
     console.log(addedPizza[0]);
   };
 
+  const emptyCart = () => {
+    cartPizzas.length === 0 ? alert('El carro está vacío') : setCartPizzas([]);
+  };
+
   const irAHome = () => {
     navigate(`/`);
   };
@@ -42,6 +46,7 @@ export const Provider = ({ children }) => {
     anhadirPizza,
     cartPizzas,
     irAHome,
+    emptyCart,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

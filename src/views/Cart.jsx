@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Cart = () => {
-  const { cartPizzas, irAHome } = useContext(Context);
+  const { cartPizzas, irAHome, emptyCart } = useContext(Context);
 
   return (
     <>
@@ -54,15 +54,28 @@ const Cart = () => {
             <ListGroupItem className="py-3">
               <h4>Total: $134.640</h4>
               <div className="d-flex justify-content-between">
-                <Button variant="success">Ir a pagar</Button>
-                <Button
-                  variant="outline-success"
-                  onClick={() => {
-                    irAHome();
-                  }}
-                >
-                  Agregar otra pizza
-                </Button>
+                <div>
+                  <Button variant="success">Ir a pagar</Button>
+                  <Button
+                    variant="outline-success"
+                    className="ms-2"
+                    onClick={() => {
+                      irAHome();
+                    }}
+                  >
+                    Agregar otra pizza
+                  </Button>
+                </div>
+                <div>
+                  <Button
+                    variant="outline-danger"
+                    onClick={() => {
+                      emptyCart();
+                    }}
+                  >
+                    Vaciar carro
+                  </Button>
+                </div>
               </div>
             </ListGroupItem>
           </ListGroup>
