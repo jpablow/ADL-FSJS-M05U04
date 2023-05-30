@@ -1,6 +1,8 @@
 import { createContext, useEffect, useState } from 'react';
 import data from '../src/pizzas.json';
 import { useNavigate } from 'react-router-dom';
+import Modal from 'react-bootstrap/Modal';
+import Button from 'react-bootstrap/Button';
 
 export const Context = createContext();
 
@@ -8,6 +10,9 @@ export const Provider = ({ children }) => {
   const navigate = useNavigate();
   const [selectedPizza, setSelectedPizza] = useState([]);
   const [cartPizzas, setCartPizzas] = useState([]);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const verDetalle = (pid) => {
     const filteredPizza = data.filter((pizza) => pizza.id === pid);
@@ -22,20 +27,40 @@ export const Provider = ({ children }) => {
     cartPizzas.length === 0
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
-    console.log(addedPizza[0]);
   };
 
   const emptyCart = () => {
-    cartPizzas.length === 0 ? alert('El carro está vacío') : setCartPizzas([]);
+    if (cartPizzas.length === 0) {
+      handleShow();
+    } else {
+      setCartPizzas([]);
+      handleShow();
+    }
   };
 
   const irAHome = () => {
     navigate(`/`);
   };
 
+  const irACarro = () => {
+    navigate(`/cart`);
+  };
+
   const formatNum = (num) => {
     return num.toLocaleString('es-cl', { style: 'currency', currency: 'CLP' });
   };
+
+  function formatText(str) {
+    console.log(str);
+    const newStr = str
+      .split(' ')
+      .map((txt) => {
+        return txt.charAt(0).toUpperCase() + txt.slice(1);
+      })
+      .join(' ');
+    console.log(newStr);
+    return newStr;
+  }
 
   // useEffect(() => {
   //   return () => {
@@ -52,6 +77,11 @@ export const Provider = ({ children }) => {
     irAHome,
     emptyCart,
     formatNum,
+    show,
+    handleClose,
+    handleShow,
+    formatText,
+    irACarro,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

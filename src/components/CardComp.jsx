@@ -8,15 +8,8 @@ import { faCartPlus, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
 import { useContext, useEffect } from 'react';
 import { Context } from '../Context';
 
-// pasar array al componente para el render en Home o en Detail
 const CardComp = () => {
   const { data, verDetalle, anhadirPizza, formatNum } = useContext(Context);
-
-  // useEffect(() => {
-  //   return () => {
-  //     console.log('data: ', data);
-  //   };
-  // }, []);
 
   return (
     <Row xs={1} md={2} xl={3} xxl={4} className="g-4">
@@ -33,7 +26,6 @@ const CardComp = () => {
               </Card.Title>
               <hr></hr>
               <Card.Subtitle className="fw-bold">Ingredientes:</Card.Subtitle>
-              {/* <Card.Text> */}
               <ul>
                 {p.ingredients.map((ing, i) => (
                   <li
@@ -45,7 +37,6 @@ const CardComp = () => {
                   </li>
                 ))}
               </ul>
-              {/* </Card.Text> */}
               <hr></hr>
               <Card.Title className="text-center fs-2 my-5">
                 {formatNum(p.price)}

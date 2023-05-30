@@ -18,7 +18,7 @@ const Home = () => {
           <Col lg="2"></Col>
         </Container>
       </div>
-      <Container className="mt-5">
+      <Container className="py-4">
         <CardComp />
       </Container>
     </>

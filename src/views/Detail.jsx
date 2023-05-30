@@ -2,6 +2,7 @@ import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import Image from 'react-bootstrap/Image';
@@ -9,11 +10,21 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Detail = () => {
-  const { selectedPizza, anhadirPizza, formatNum } = useContext(Context);
+  const {
+    selectedPizza,
+    anhadirPizza,
+    formatNum,
+    show,
+    handleClose,
+    handleShow,
+    irAHome,
+    formatText,
+    irACarro,
+  } = useContext(Context);
   console.log(selectedPizza);
 
   return (
-    <Container className="nav-spc pt-5">
+    <Container className="nav-spc py-5">
       <Row>
         <Col></Col>
         <Col md="auto">
@@ -42,15 +53,63 @@ const Detail = () => {
                   </ul>
                   <div className="d-flex justify-content-between align-items-center">
                     <h3 className="my-0">Precio: {formatNum(p.price)}</h3>
-                    <Button
-                      className="text-center"
-                      variant="success"
-                      value={p.id}
-                      onClick={(e) => anhadirPizza(e.target.value)}
+                    <div>
+                      <Button variant="outline-success" onClick={irAHome}>
+                        Ver otras pizzas
+                      </Button>
+                      <Button
+                        className="ms-2"
+                        variant="success"
+                        value={p.id}
+                        onClick={(e) => {
+                          anhadirPizza(e.target.value);
+                          handleShow();
+                        }}
+                      >
+                        Añadir{'   '}
+                        <FontAwesomeIcon className="ms-2" icon={faCartPlus} />
+                      </Button>
+                    </div>
+
+                    <Modal
+                      show={show}
+                      onHide={handleClose}
+                      backdrop="static"
+                      keyboard={false}
                     >
-                      Añadir{'   '}
-                      <FontAwesomeIcon className="ms-2" icon={faCartPlus} />
-                    </Button>
+                      <Modal.Header closeButton>
+                        <Modal.Title>¡Pizzería Mamma Mia!</Modal.Title>
+                      </Modal.Header>
+                      <Modal.Body>
+                        Agregaste la pizza {formatText(p.name)}
+                      </Modal.Body>
+                      <Modal.Footer className="d-flex justify-content-between">
+                        <div>
+                          <Button
+                            variant="success"
+                            onClick={() => {
+                              handleClose();
+                              irAHome();
+                            }}
+                          >
+                            Ver pizzas
+                          </Button>
+                          <Button
+                            variant="outline-success"
+                            className="ms-2"
+                            onClick={() => {
+                              handleClose();
+                              irACarro();
+                            }}
+                          >
+                            Ver carrito
+                          </Button>
+                        </div>
+                        <Button variant="outline-danger" onClick={handleClose}>
+                          Cerrar
+                        </Button>
+                      </Modal.Footer>
+                    </Modal>
                   </div>
                 </Container>
               </Container>
