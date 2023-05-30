@@ -1,8 +1,8 @@
-.nav-spc{
+.nav-spc {
     margin-top: 56px;
 }
 
-.hd-img{
+.hd-img {
     background-image: url("../Pizza_bg02.jpg");
     height: 250px;
     background-size: cover;
@@ -10,15 +10,27 @@
     background-position: center;
 }
 
-.td-none{
+.td-none {
     text-decoration: none;
 }
 
-.pz-li{
+.pz-li {
     transform: rotate(-65deg);
     margin-right: 5px;
 }
 
-ul{
+ul {
     list-style-type: none;
+}
+
+.cust-card {
+    display: flex;
+    align-items: center;
+    border: solid 1px #0000002d;
+    border-radius: 0.375rem;
+    padding: 8px;
+}
+
+.cust-card-footer {
+    display: flex;
 }
