@@ -7,7 +7,7 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Cart = () => {
-  const { cartPizzas } = useContext(Context);
+  const { cartPizzas, irAHome } = useContext(Context);
 
   return (
     <>
@@ -53,7 +53,17 @@ const Cart = () => {
 
             <ListGroupItem className="py-3">
               <h4>Total: $134.640</h4>
-              <Button variant="success">Ir a pagar</Button>
+              <div className="d-flex justify-content-between">
+                <Button variant="success">Ir a pagar</Button>
+                <Button
+                  variant="outline-success"
+                  onClick={() => {
+                    irAHome();
+                  }}
+                >
+                  Agregar otra pizza
+                </Button>
+              </div>
             </ListGroupItem>
           </ListGroup>
         </Container>

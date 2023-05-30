@@ -25,6 +25,10 @@ export const Provider = ({ children }) => {
     console.log(addedPizza[0]);
   };
 
+  const irAHome = () => {
+    navigate(`/`);
+  };
+
   // useEffect(() => {
   //   return () => {
   //     console.log(cartPizzas);
@@ -37,6 +41,7 @@ export const Provider = ({ children }) => {
     selectedPizza,
     anhadirPizza,
     cartPizzas,
+    irAHome,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
