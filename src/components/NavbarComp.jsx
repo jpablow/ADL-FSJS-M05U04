@@ -19,7 +19,7 @@ export default function NavbarComp() {
         <Container className="text-end">
           <NavLink className="td-none text-white" to="/Cart">
             <FontAwesomeIcon icon={faCartShopping} />
-            <Badge pill bg="warning" className="text-dark">
+            <Badge pill bg="warning" className="text-dark badge-pos">
               {cartPizzas.length}
             </Badge>{' '}
             Var Monto Cart

@@ -35,3 +35,9 @@ ul {
     width: auto;
     height: 50px;
 }
+
+.badge-pos {
+    position: relative;
+    right:8px;
+    top:-12px;
+}
