@@ -7,6 +7,7 @@ export const Context = createContext();
 export const Provider = ({ children }) => {
   const navigate = useNavigate();
   const [selectedPizza, setSelectedPizza] = useState([]);
+  const [cartPizzas, setCartPizzas] = useState([]);
 
   const verDetalle = (pid) => {
     const filteredPizza = data.filter((pizza) => pizza.id === pid);
@@ -16,16 +17,25 @@ export const Provider = ({ children }) => {
     );
   };
 
+  const anhadirPizza = (pid) => {
+    const addedPizza = data.filter((pizza) => pizza.id === pid);
+    cartPizzas.length === 0
+      ? setCartPizzas([addedPizza[0]])
+      : setCartPizzas([...cartPizzas, addedPizza[0]]);
+    console.log(addedPizza[0]);
+  };
+
   // useEffect(() => {
   //   return () => {
-  //     console.log('data: ', data);
+  //     console.log(cartPizzas);
   //   };
-  // }, []);
+  // }, [cartPizzas]);
 
   const globalState = {
     data,
     verDetalle,
     selectedPizza,
+    anhadirPizza,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

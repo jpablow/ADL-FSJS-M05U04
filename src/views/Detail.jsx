@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Detail = () => {
-  const { selectedPizza } = useContext(Context);
+  const { selectedPizza, anhadirPizza } = useContext(Context);
   console.log(selectedPizza);
 
   return (
@@ -46,6 +46,7 @@ const Detail = () => {
                       className="text-center"
                       variant="success"
                       value={p.id}
+                      onClick={(e) => anhadirPizza(e.target.value)}
                     >
                       Añadir{'   '}
                       <FontAwesomeIcon className="ms-2" icon={faCartPlus} />
