@@ -33,6 +33,10 @@ export const Provider = ({ children }) => {
     navigate(`/`);
   };
 
+  const formatNum = (num) => {
+    return num.toLocaleString('es-cl', { style: 'currency', currency: 'CLP' });
+  };
+
   // useEffect(() => {
   //   return () => {
   //     console.log(cartPizzas);
@@ -47,6 +51,7 @@ export const Provider = ({ children }) => {
     cartPizzas,
     irAHome,
     emptyCart,
+    formatNum,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

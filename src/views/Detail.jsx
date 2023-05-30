@@ -9,7 +9,7 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Detail = () => {
-  const { selectedPizza, anhadirPizza } = useContext(Context);
+  const { selectedPizza, anhadirPizza, formatNum } = useContext(Context);
   console.log(selectedPizza);
 
   return (
@@ -41,7 +41,7 @@ const Detail = () => {
                     ))}
                   </ul>
                   <div className="d-flex justify-content-between align-items-center">
-                    <h3 className="my-0">Precio: ${p.price}</h3>
+                    <h3 className="my-0">Precio: {formatNum(p.price)}</h3>
                     <Button
                       className="text-center"
                       variant="success"

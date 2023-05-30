@@ -10,7 +10,7 @@ import { Context } from '../Context';
 
 // pasar array al componente para el render en Home o en Detail
 const CardComp = () => {
-  const { data, verDetalle, anhadirPizza } = useContext(Context);
+  const { data, verDetalle, anhadirPizza, formatNum } = useContext(Context);
 
   // useEffect(() => {
   //   return () => {
@@ -48,7 +48,7 @@ const CardComp = () => {
               {/* </Card.Text> */}
               <hr></hr>
               <Card.Title className="text-center fs-2 my-5">
-                ${p.price}
+                {formatNum(p.price)}
               </Card.Title>
               <Container fluid className="d-flex justify-content-between">
                 <Button
