@@ -1,7 +1,27 @@
-import { createContext } from 'react';
+import { createContext, useEffect, useState } from 'react';
+import data from '../src/pizzas.json';
+import { useNavigate } from 'react-router-dom';
 
 export const Context = createContext();
 
 export const Provider = ({ children }) => {
-  return <Context.Provider value={{ id: 123 }}>{children}</Context.Provider>;
+  const [selectedPizza, setSelectedPizza] = useState([]);
+  const navigate = useNavigate();
+
+  const verDetalle = (pid) => {
+    setSelectedPizza(data.filter((pizza) => pizza.id === pid));
+    navigate(`/pizza/${selectedPizza.name}`);
+  };
+
+  // useEffect(() => {
+  //   return () => {
+  //     console.log('data: ', data);
+  //   };
+  // }, []);
+
+  const globalState = {
+    data,
+    verDetalle,
+  };
+  return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

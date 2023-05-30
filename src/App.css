@@ -31,10 +31,6 @@ ul {
     padding: 8px;
 }
 
-.cust-card-footer {
-    display: flex;
-}
-
 .cart-img {
     width: auto;
     height: 50px;

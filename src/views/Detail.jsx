@@ -1,10 +1,9 @@
 import Container from 'react-bootstrap/esm/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCartPlus, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 import Image from 'react-bootstrap/Image';
 
 const Detail = () => {
@@ -47,7 +46,7 @@ const Detail = () => {
                   <div className="pz-li">🍕</div> Orégano
                 </li>
               </ul>
-              <div className="cust-card-footer justify-content-between align-items-center">
+              <div className="d-flex justify-content-between align-items-center">
                 <h3 className="my-0">Precio: $5.990</h3>
                 <Button className="text-center" variant="success">
                   Añadir{'   '}
