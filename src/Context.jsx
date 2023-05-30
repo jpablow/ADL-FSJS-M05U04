@@ -36,6 +36,7 @@ export const Provider = ({ children }) => {
     verDetalle,
     selectedPizza,
     anhadirPizza,
+    cartPizzas,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
