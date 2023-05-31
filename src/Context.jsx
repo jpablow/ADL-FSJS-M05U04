@@ -26,10 +26,10 @@ export const Provider = ({ children }) => {
   }, []);
 
   function verDetalle(pid) {
-    const filteredPizza = data.filter((pizza) => pizza.id === pid);
+    const filteredPizza = data.filter((el) => el.id === pid);
     return (
       setSelectedPizza([filteredPizza[0]]),
-      navigate(`/pizza/${filteredPizza[0].name}`)
+      navigate(`/pizza/${filteredPizza[0].id}`)
     );
   }
 
