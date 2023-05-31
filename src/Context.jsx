@@ -1,4 +1,4 @@
-import { createContext, useEffect, useState } from 'react';
+import { createContext, useState } from 'react';
 import data from '../src/pizzas.json';
 import { useNavigate } from 'react-router-dom';
 
@@ -30,7 +30,6 @@ export const Provider = ({ children }) => {
     cartPizzas.length === 0
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
-    console.log(cartPizzas);
     setCartTotal(
       cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
     );
@@ -58,14 +57,12 @@ export const Provider = ({ children }) => {
   }
 
   function formatText(str) {
-    console.log(str);
     const newStr = str
       .split(' ')
       .map((txt) => {
         return txt.charAt(0).toUpperCase() + txt.slice(1);
       })
       .join(' ');
-    console.log(newStr);
     return newStr;
   }
 
@@ -83,15 +80,7 @@ export const Provider = ({ children }) => {
     setCartTotal(
       cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
     );
-
-    console.log(cartTotal);
   };
-
-  // useEffect(() => {
-  //   return () => {
-  //     console.log(cartPizzas);
-  //   };
-  // }, [cartPizzas]);
 
   const globalState = {
     data,
