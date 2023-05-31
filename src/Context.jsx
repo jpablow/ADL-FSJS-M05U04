@@ -8,7 +8,6 @@ export const Provider = ({ children }) => {
   const [data, setData] = useState([]);
   const [selectedPizza, setSelectedPizza] = useState([]);
   const [cartPizzas, setCartPizzas] = useState([]);
-  const [cartTotal, setCartTotal] = useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -120,7 +119,6 @@ export const Provider = ({ children }) => {
     irACarro,
     addQ,
     rmvQ,
-    cartTotal,
   };
 
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
