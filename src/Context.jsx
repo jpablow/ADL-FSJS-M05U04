@@ -1,8 +1,6 @@
 import { createContext, useEffect, useState } from 'react';
 import data from '../src/pizzas.json';
 import { useNavigate } from 'react-router-dom';
-import Modal from 'react-bootstrap/Modal';
-import Button from 'react-bootstrap/Button';
 
 export const Context = createContext();
 
@@ -10,19 +8,20 @@ export const Provider = ({ children }) => {
   const navigate = useNavigate();
   const [selectedPizza, setSelectedPizza] = useState([]);
   const [cartPizzas, setCartPizzas] = useState([]);
+  const [newPizza, setNewPizza] = useState({});
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  const verDetalle = (pid) => {
+  function verDetalle(pid) {
     const filteredPizza = data.filter((pizza) => pizza.id === pid);
     return (
       setSelectedPizza([filteredPizza[0]]),
       navigate(`/pizza/${filteredPizza[0].name}`)
     );
-  };
+  }
 
-  const anhadirPizza = (pid) => {
+  function anhadirPizza(pid) {
     const addedPizza = data
       .filter((pizza) => pizza.id === pid)
       .map((p) => {
@@ -32,28 +31,28 @@ export const Provider = ({ children }) => {
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
     console.log(cartPizzas);
-  };
+  }
 
-  const emptyCart = () => {
+  function emptyCart() {
     if (cartPizzas.length === 0) {
       handleShow();
     } else {
       setCartPizzas([]);
       handleShow();
     }
-  };
+  }
 
-  const irAHome = () => {
+  function irAHome() {
     navigate(`/`);
-  };
+  }
 
-  const irACarro = () => {
+  function irACarro() {
     navigate(`/cart`);
-  };
+  }
 
-  const formatNum = (num) => {
+  function formatNum(num) {
     return num.toLocaleString('es-cl', { style: 'currency', currency: 'CLP' });
-  };
+  }
 
   function formatText(str) {
     console.log(str);
@@ -66,6 +65,18 @@ export const Provider = ({ children }) => {
     console.log(newStr);
     return newStr;
   }
+
+  const addQ = (pid) => {
+    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
+    cartPizzas[addIdx].q++;
+    setCartPizzas([...cartPizzas]);
+  };
+
+  const rmvQ = (pid) => {
+    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
+    cartPizzas[addIdx].q--;
+    setCartPizzas([...cartPizzas]);
+  };
 
   // useEffect(() => {
   //   return () => {
@@ -87,6 +98,8 @@ export const Provider = ({ children }) => {
     handleShow,
     formatText,
     irACarro,
+    addQ,
+    rmvQ,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };

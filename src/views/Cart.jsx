@@ -8,8 +8,16 @@ import { useContext } from 'react';
 import { Context } from '../Context';
 
 const Cart = () => {
-  const { cartPizzas, irAHome, emptyCart, show, handleClose, handleShow } =
-    useContext(Context);
+  const {
+    cartPizzas,
+    irAHome,
+    emptyCart,
+    show,
+    handleClose,
+    formatNum,
+    addQ,
+    rmvQ,
+  } = useContext(Context);
 
   return (
     <>
@@ -29,25 +37,23 @@ const Cart = () => {
                         </span>
                       </div>
                       <div className="d-flex align-items-center fw-bold">
-                        <span className="text-success fw-normal">$35.940</span>
+                        <span className="text-success fw-normal">
+                          {formatNum(p.price * p.q)}
+                        </span>
                         <Button
                           className="ms-3 me-1 fw-bold"
                           variant="outline-danger"
                           value={p.id}
-                          onClick={(e) =>
-                            console.log('-1 de: ', e.target.value)
-                          }
+                          onClick={(e) => rmvQ(e.target.value)}
                         >
                           -
                         </Button>{' '}
-                        <span>6</span>{' '}
+                        <span>{p.q}</span>{' '}
                         <Button
                           className="ms-1 fw-bold"
                           variant="outline-success"
                           value={p.id}
-                          onClick={(e) =>
-                            console.log('+1 de: ', e.target.value)
-                          }
+                          onClick={(e) => addQ(e.target.value)}
                         >
                           +
                         </Button>
