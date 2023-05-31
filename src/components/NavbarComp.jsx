@@ -8,7 +8,7 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Context } from '../Context';
 
 export default function NavbarComp() {
-  const { cartPizzas } = useContext(Context);
+  const { cartPizzas, formatNum, cartTotal } = useContext(Context);
 
   return (
     <Navbar bg="success" variant="dark" fixed="top">
@@ -22,7 +22,7 @@ export default function NavbarComp() {
             <Badge pill bg="warning" className="text-dark badge-pos">
               {cartPizzas.length}
             </Badge>{' '}
-            Var Monto Cart
+            {formatNum(cartTotal)}
           </NavLink>
         </Container>
       </Container>

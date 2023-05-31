@@ -8,7 +8,7 @@ export const Provider = ({ children }) => {
   const navigate = useNavigate();
   const [selectedPizza, setSelectedPizza] = useState([]);
   const [cartPizzas, setCartPizzas] = useState([]);
-  const [newPizza, setNewPizza] = useState({});
+  const [cartTotal, setCartTotal] = useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -31,6 +31,9 @@ export const Provider = ({ children }) => {
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
     console.log(cartPizzas);
+    setCartTotal(
+      cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
+    );
   }
 
   function emptyCart() {
@@ -76,6 +79,12 @@ export const Provider = ({ children }) => {
     const addIdx = cartPizzas.findIndex((el) => el.id === pid);
     cartPizzas[addIdx].q--;
     setCartPizzas([...cartPizzas]);
+
+    setCartTotal(
+      cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
+    );
+
+    console.log(cartTotal);
   };
 
   // useEffect(() => {
@@ -100,6 +109,7 @@ export const Provider = ({ children }) => {
     irACarro,
     addQ,
     rmvQ,
+    cartTotal,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
