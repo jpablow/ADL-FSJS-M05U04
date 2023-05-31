@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartPlus, faPizzaSlice } from '@fortawesome/free-solid-svg-icons';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 import { Context } from '../Context';
 
 const CardComp = () => {

@@ -4,7 +4,7 @@ import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import ListGroupItem from 'react-bootstrap/esm/ListGroupItem';
 import Modal from 'react-bootstrap/Modal';
-import { useContext } from 'react';
+import { useContext, useEffect } from 'react';
 import { Context } from '../Context';
 
 const Cart = () => {
@@ -18,7 +18,14 @@ const Cart = () => {
     addQ,
     rmvQ,
     cartTotal,
+    cartTotalizer,
   } = useContext(Context);
+
+  useEffect(() => {
+    return () => {
+      cartTotalizer();
+    };
+  }, [cartPizzas]);
 
   return (
     <>

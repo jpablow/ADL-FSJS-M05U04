@@ -1,17 +1,41 @@
-import { createContext, useState } from 'react';
-import data from '../src/pizzas.json';
+import { createContext, useEffect, useState } from 'react';
+// import data from '../src/pizzas.json';
 import { useNavigate } from 'react-router-dom';
 
 export const Context = createContext();
 
 export const Provider = ({ children }) => {
   const navigate = useNavigate();
+  const [data, setData] = useState([]);
   const [selectedPizza, setSelectedPizza] = useState([]);
   const [cartPizzas, setCartPizzas] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
+  const endpoint = '/pizzas.json';
+
+  const getPizzas = async () => {
+    const resp = await fetch(endpoint);
+    const dat = await resp.json();
+    setData(dat);
+  };
+
+  useEffect(() => {
+    return () => {
+      getPizzas();
+    };
+  }, []);
+
+  function cartTotalizer() {
+    if (cartPizzas.length === 0) {
+      return setCartTotal(0);
+    } else {
+      return setCartTotal(
+        cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
+      );
+    }
+  }
 
   function verDetalle(pid) {
     const filteredPizza = data.filter((pizza) => pizza.id === pid);
@@ -21,7 +45,7 @@ export const Provider = ({ children }) => {
     );
   }
 
-  function anhadirPizza(pid) {
+  const anhadirPizza = (pid) => {
     const addedPizza = data
       .filter((pizza) => pizza.id === pid)
       .map((p) => {
@@ -30,10 +54,8 @@ export const Provider = ({ children }) => {
     cartPizzas.length === 0
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
-    setCartTotal(
-      cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
-    );
-  }
+    cartTotalizer();
+  };
 
   function emptyCart() {
     if (cartPizzas.length === 0) {
@@ -42,6 +64,7 @@ export const Provider = ({ children }) => {
       setCartPizzas([]);
       handleShow();
     }
+    cartTotalizer();
   }
 
   function irAHome() {
@@ -51,6 +74,20 @@ export const Provider = ({ children }) => {
   function irACarro() {
     navigate(`/cart`);
   }
+
+  const addQ = (pid) => {
+    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
+    cartPizzas[addIdx].q++;
+    setCartPizzas([...cartPizzas]);
+    cartTotalizer();
+  };
+
+  const rmvQ = (pid) => {
+    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
+    cartPizzas[addIdx].q--;
+    setCartPizzas([...cartPizzas]);
+    cartTotalizer();
+  };
 
   function formatNum(num) {
     return num.toLocaleString('es-cl', { style: 'currency', currency: 'CLP' });
@@ -66,21 +103,11 @@ export const Provider = ({ children }) => {
     return newStr;
   }
 
-  const addQ = (pid) => {
-    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
-    cartPizzas[addIdx].q++;
-    setCartPizzas([...cartPizzas]);
-  };
-
-  const rmvQ = (pid) => {
-    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
-    cartPizzas[addIdx].q--;
-    setCartPizzas([...cartPizzas]);
-
-    setCartTotal(
-      cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
-    );
-  };
+  useEffect(() => {
+    return () => {
+      cartTotalizer();
+    };
+  }, [cartPizzas]);
 
   const globalState = {
     data,
@@ -99,6 +126,7 @@ export const Provider = ({ children }) => {
     addQ,
     rmvQ,
     cartTotal,
+    cartTotalizer,
   };
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
