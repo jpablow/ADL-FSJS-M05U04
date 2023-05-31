@@ -21,7 +21,6 @@ const Detail = () => {
     formatText,
     irACarro,
   } = useContext(Context);
-  console.log(selectedPizza);
 
   return (
     <Container className="nav-spc py-5">

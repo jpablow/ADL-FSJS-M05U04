@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Badge from 'react-bootstrap/Badge';
@@ -8,14 +8,8 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { Context } from '../Context';
 
 export default function NavbarComp() {
-  const { cartPizzas, formatNum, cartTotal, cartTotalizer } =
-    useContext(Context);
-
-  useEffect(() => {
-    return () => {
-      cartTotalizer();
-    };
-  }, [cartTotal]);
+  const { cartPizzas, formatNum } = useContext(Context);
+  const tot = cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0);
 
   return (
     <Navbar bg="success" variant="dark" fixed="top">
@@ -29,7 +23,7 @@ export default function NavbarComp() {
             <Badge pill bg="warning" className="text-dark badge-pos">
               {cartPizzas.length}
             </Badge>{' '}
-            {formatNum(cartTotal)}
+            {formatNum(tot)}
           </NavLink>
         </Container>
       </Container>

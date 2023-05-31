@@ -1,5 +1,4 @@
 import { createContext, useEffect, useState } from 'react';
-// import data from '../src/pizzas.json';
 import { useNavigate } from 'react-router-dom';
 
 export const Context = createContext();
@@ -29,7 +28,9 @@ export const Provider = ({ children }) => {
 
   function cartTotalizer() {
     if (cartPizzas.length === 0) {
-      return setCartTotal(0);
+      return setCartTotal(
+        cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
+      );
     } else {
       return setCartTotal(
         cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
@@ -107,7 +108,7 @@ export const Provider = ({ children }) => {
     return () => {
       cartTotalizer();
     };
-  }, [cartPizzas]);
+  });
 
   const globalState = {
     data,
