@@ -17,8 +17,9 @@ const Cart = () => {
     formatNum,
     addQ,
     rmvQ,
-    cartTotal,
   } = useContext(Context);
+
+  const tot = cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0);
 
   return (
     <>
@@ -65,7 +66,7 @@ const Cart = () => {
               })}
 
               <ListGroupItem className="py-3">
-                <h4>Total: {formatNum(cartTotal)}</h4>
+                <h4>Total: {formatNum(tot)}</h4>
                 <div className="d-flex justify-content-between">
                   <div>
                     <Button variant="success">Ir a pagar</Button>

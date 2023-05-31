@@ -26,18 +26,6 @@ export const Provider = ({ children }) => {
     };
   }, []);
 
-  function cartTotalizer() {
-    if (cartPizzas.length === 0) {
-      return setCartTotal(
-        cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
-      );
-    } else {
-      return setCartTotal(
-        cartPizzas.reduce((prev, { price, q }) => prev + price * q, 0)
-      );
-    }
-  }
-
   function verDetalle(pid) {
     const filteredPizza = data.filter((pizza) => pizza.id === pid);
     return (
@@ -48,14 +36,24 @@ export const Provider = ({ children }) => {
 
   const anhadirPizza = (pid) => {
     const addedPizza = data
-      .filter((pizza) => pizza.id === pid)
+      .filter((el) => el.id === pid)
       .map((p) => {
         return { id: p.id, img: p.img, name: p.name, price: p.price, q: 1 };
       });
-    cartPizzas.length === 0
+
+    const exists = cartPizzas.some((el) => {
+      if (el.id === pid) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+
+    exists
+      ? addQ(pid)
+      : cartPizzas.length === 0
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
-    cartTotalizer();
   };
 
   function emptyCart() {
@@ -65,7 +63,6 @@ export const Provider = ({ children }) => {
       setCartPizzas([]);
       handleShow();
     }
-    cartTotalizer();
   }
 
   function irAHome() {
@@ -77,17 +74,20 @@ export const Provider = ({ children }) => {
   }
 
   const addQ = (pid) => {
-    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
-    cartPizzas[addIdx].q++;
+    const idx = cartPizzas.findIndex((el) => el.id === pid);
+    cartPizzas[idx].q++;
     setCartPizzas([...cartPizzas]);
-    cartTotalizer();
   };
 
   const rmvQ = (pid) => {
-    const addIdx = cartPizzas.findIndex((el) => el.id === pid);
-    cartPizzas[addIdx].q--;
-    setCartPizzas([...cartPizzas]);
-    cartTotalizer();
+    const idx = cartPizzas.findIndex((el) => el.id === pid);
+    if (cartPizzas[idx].q === 1) {
+      const newArr = cartPizzas.filter((el) => el.id !== pid);
+      return setCartPizzas([...newArr]);
+    } else {
+      cartPizzas[idx].q--;
+      setCartPizzas([...cartPizzas]);
+    }
   };
 
   function formatNum(num) {
@@ -103,12 +103,6 @@ export const Provider = ({ children }) => {
       .join(' ');
     return newStr;
   }
-
-  useEffect(() => {
-    return () => {
-      cartTotalizer();
-    };
-  });
 
   const globalState = {
     data,
@@ -127,7 +121,7 @@ export const Provider = ({ children }) => {
     addQ,
     rmvQ,
     cartTotal,
-    cartTotalizer,
   };
+
   return <Context.Provider value={globalState}>{children}</Context.Provider>;
 };
