@@ -94,6 +94,7 @@ const Cart = () => {
                         <Button
                           variant="success"
                           onClick={() => {
+                            handleClose();
                             irAHome();
                           }}
                         >

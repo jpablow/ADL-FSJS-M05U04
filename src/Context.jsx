@@ -23,10 +23,15 @@ export const Provider = ({ children }) => {
   };
 
   const anhadirPizza = (pid) => {
-    const addedPizza = data.filter((pizza) => pizza.id === pid);
+    const addedPizza = data
+      .filter((pizza) => pizza.id === pid)
+      .map((p) => {
+        return { id: p.id, img: p.img, name: p.name, price: p.price, q: 1 };
+      });
     cartPizzas.length === 0
       ? setCartPizzas([addedPizza[0]])
       : setCartPizzas([...cartPizzas, addedPizza[0]]);
+    console.log(cartPizzas);
   };
 
   const emptyCart = () => {
