@@ -15,8 +15,8 @@ function App() {
         <NavbarComp />
 
         <Routes>
-          <Route path="/"
-            ><Home />
+          <Route path="/">
+            <Home />
           </Route>
           <Route path="/cart">
             <Cart />
