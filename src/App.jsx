@@ -15,10 +15,18 @@ function App() {
         <NavbarComp />
 
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/cart" element={<Cart />} />
-          <Route path="/pizza/:id" element={<Detail />} />
-          <Route path="*" element={<NotFound />} />
+          <Route path="/"
+            ><Home />
+          </Route>
+          <Route path="/cart">
+            <Cart />
+          </Route>
+          <Route path="/pizza/:id">
+            <Detail />
+          </Route>
+          <Route path="*">
+            <NotFound />
+          </Route>
         </Routes>
       </Provider>
     </BrowserRouter>
